@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import Main.Game;
 import Main.Main;
 
 public class Controler implements KeyListener, MouseListener, MouseMotionListener {
@@ -16,7 +17,7 @@ public class Controler implements KeyListener, MouseListener, MouseMotionListene
 
 	public Controler(Main main) {
 		this.main = main;
-		mouse = new Mouse(0, 0);
+		mouse = new Mouse(0, 0,main.getGame());
 	}
 	
 	public Mouse getMouse(){

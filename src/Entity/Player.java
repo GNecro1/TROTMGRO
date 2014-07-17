@@ -10,6 +10,7 @@ import java.util.Random;
 import Control.Controler;
 import Control.Mouse;
 import Control.Timer;
+import Entity.Missle.Energy;
 import Entity.Missle.WaterBolt;
 import Graphics.Animation;
 import Graphics.RL;
@@ -34,7 +35,6 @@ public class Player extends Entity {
 	private int bX, bY;
 	private Timer t = new Timer(3);
 	private Timer MRT = new Timer(0.5);
-	public static int x2, y2;
 
 	public Player(int x, int y, World w) {
 		super(x, y, 48, 48);
@@ -63,8 +63,6 @@ public class Player extends Entity {
 			MRT.reset();
 		}
 		colBox.setBounds((int) x, (int) y, width, height);
-		x2 = (int) x;
-		y2 = (int) y;
 		setBounds((int) x, (int) y, width, height);
 	}
 
@@ -112,10 +110,9 @@ public class Player extends Entity {
 	private WaterBolt wb;
 
 	private void shoot() {
-		if (m.clicked && mana > 15 && t.Ring()) {
-			wb = new WaterBolt((int) x + 24, (int) y + 24, 14, 14, m.getX() + getOffset()[0], m.getY() + getOffset()[1], world);
+		if (m.clicked) {
+			new WaterBolt((int) x + 24, (int) y + 24, m.getX() + getOffset()[0], m.getY() + getOffset()[1], world);
 
-			mana -= 15;
 			t.reset();
 		}
 
@@ -197,11 +194,11 @@ public class Player extends Entity {
 		return true;
 	}
 
-	public static int[] getOffset() {
+	public int[] getOffset() {
 		int[] i = new int[2];
 
-		i[0] = (int) (x2 - (Main.width / 2 - 32));
-		i[1] = (int) (y2 - (Main.height / 2 - 32));
+		i[0] = (int) (x - (448 - 32));
+		i[1] = (int) (y - (360 - 32));
 
 		return i;
 	}

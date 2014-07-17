@@ -8,8 +8,10 @@ public class Mouse extends Point {
 	private static final long serialVersionUID = 1L;
 
 	public boolean clicked = false, rightClicked = false, midleClicked = false;
-
-	public Mouse(int x, int y) {
+	Game Game;
+	
+	public Mouse(int x, int y, Game g) {
+		Game = g;
 		setLocation(x, y);
 	}
 

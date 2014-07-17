@@ -10,7 +10,7 @@ public class CameraOnline {
 	private Multiplayer mp;
 	
 	public CameraOnline(Multiplayer multiplayer) {
-mp = multiplayer;
+		mp = multiplayer;
 	}
 
 	public void tick() {

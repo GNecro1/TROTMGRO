@@ -7,7 +7,7 @@ public class Camera {
 
 	private int xOff, yOff;
 
-	public void tick() {
+	public void tick(Player Player) {
 		xOff = Player.getOffset()[0];
 		yOff = Player.getOffset()[1];
 	}

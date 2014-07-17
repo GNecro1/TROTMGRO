@@ -22,6 +22,19 @@ public class BufImage {
 		tile = bildTileset.getSubimage(x * width, y * height, width, height);
 		return tile;
 	}
+	
+	/*public static BufferedImage grabImage(String path, int x, int y, int width, int height) {
+		BufferedImage tile = null;
+		BufferedImage bildTileset = null;
+		try {
+			bildTileset = ImageIO.read(BufImage.class.getClassLoader().getResource(path));
+		} catch (IOException error) {
+			System.err.println("Tileset not found");
+			error.printStackTrace();
+		}
+		tile = bildTileset.getSubimage(x * width, y * height, width, height);
+		return tile;
+	}*/
 
 	public static BufferedImage rotateMyImage(BufferedImage img, double angle) {
 		int w = img.getWidth();

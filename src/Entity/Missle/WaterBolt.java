@@ -18,7 +18,7 @@ public class WaterBolt extends Missle {
 	private int index;
 	private World w;
 
-	public WaterBolt(int x, int y, int width, int height, double targetX, double targetY, World world) {
+	public WaterBolt(int x, int y, double targetX, double targetY, World world) {
 		super(x, y, 16, 16, targetX, targetY);
 		w = world;
 
@@ -44,7 +44,7 @@ public class WaterBolt extends Missle {
 		colors[5] = new Color(0x26CBE0);
 
 		for (int i = 0; i < 80; i++) {
-			new WaterBoltParticle(x, y, this, r.nextInt(360), r.nextInt(20), colors, r);
+			//new WaterBoltParticle(x, y, this, r.nextInt(360), r.nextInt(20), colors, r);
 		}
 	}
 
@@ -70,14 +70,14 @@ public class WaterBolt extends Missle {
 
 	private void destroy() {
 		for (int i = 0; i < 80; i++) {
-			new WaterBoltParticle(x, y, this, colors, r);
+			//new WaterBoltParticle(x, y, this, colors, r);
 		}
 		Game.missles.remove(this);
 	}
 
 	public void rendering(Graphics2D g) {
-		g.setColor(colors[index]);
-		g.fill3DRect((int) x, (int) y, width, height,true);
+		g.setColor(colors[1]);
+		g.fill3DRect((int) x, (int) y, width, height,false);
 	}
 
 }

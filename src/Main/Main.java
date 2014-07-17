@@ -13,21 +13,20 @@ import javax.swing.JFrame;
 
 import Control.Controler;
 import Control.Timer;
-import Entity.Player;
 import Graphics.Animation;
 
 public class Main extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 	public static String title = "Framework";
-	public static int width = 448*2;
-	public static int height = 320*2;
+	public static int width = 448 * 2;
+	public static int height = 320 * 2;
 	public static int index = 0;
 
 	public boolean run = false;
 	public Thread thread;
 	public int finalFrames = 0, finalTicks = 0;
-	public static boolean debug = true;
+	public static boolean debug = true, done = false;
 	public Controler control;
 
 	public static ArrayList<Timer> timers = new ArrayList<>();
@@ -48,6 +47,14 @@ public class Main extends Canvas implements Runnable {
 		menus.add(new Options(this, control));
 		menus.add(new Game(this, control));
 		menus.add(new Multiplayer(this, control));
+		done = true;
+	}
+
+	public Game getGame() {
+		if (done)
+			return (Game) menus.get(2);
+
+		return null;
 	}
 
 	public synchronized void start() {
@@ -124,7 +131,7 @@ public class Main extends Canvas implements Runnable {
 		if (debug) {
 			g.setFont(new Font("Courier", 1, 12));
 			g.setColor(Color.BLACK);
-			g.drawString("FPS : " + finalFrames + " Ticks : " + finalTicks + " Player X : " + Player.x2 + " Player Y : " + Player.y2, 0, 10);
+			g.drawString("FPS : " + finalFrames + " Ticks : " + finalTicks + " Player X : " + ((Game) menus.get(2)).p.x + " Player Y : " + ((Game) menus.get(2)).p.y, 0, 10);
 		}
 	}
 
