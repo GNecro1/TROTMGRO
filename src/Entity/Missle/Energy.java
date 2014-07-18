@@ -9,7 +9,7 @@ import Entity.Particle.WaterBoltParticle;
 import Main.Game;
 import World.World;
 
-public class Energy extends Missle{
+public class Energy extends Missile{
 	private static final long serialVersionUID = 1L;
 
 	private Timer t;
@@ -19,10 +19,16 @@ public class Energy extends Missle{
 	public Energy(int x, int y, double targetX, double targetY, World world) {
 		super(x, y, 8, 8, targetX, targetY);
 		w = world;
-		Game.missles.add(this);
-		xVel = targetX;
-		yVel = targetY;
-		t = new Timer(0.5);
+		double pathX = (targetX - x);
+		double pathY = (targetY - y);
+
+		double distance = Math.sqrt(pathX * pathX + pathY * pathY);
+		double directionX = pathX / distance;
+		double directionY = pathY / distance;
+
+		xVel = directionX * 4;
+		yVel = directionY * 4;
+		t = new Timer(3);
 		t.start();
 		r = new Random();
 
@@ -49,7 +55,7 @@ public class Energy extends Missle{
 	}
 
 	private void destroy() {
-		Game.missles.remove(this);
+		Game.missiles.remove(this);
 	}
 
 	public void rendering(Graphics2D g) {

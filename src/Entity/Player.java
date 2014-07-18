@@ -11,11 +11,9 @@ import Control.Controler;
 import Control.Mouse;
 import Control.Timer;
 import Entity.Missle.Energy;
-import Entity.Missle.WaterBolt;
 import Graphics.Animation;
 import Graphics.RL;
 import Main.Game;
-import Main.Main;
 import World.World;
 
 @SuppressWarnings("serial")
@@ -62,6 +60,8 @@ public class Player extends Entity {
 			mana++;
 			MRT.reset();
 		}
+		x2 = (m.getX() + getOffset()[0]);
+		y2 =  (m.getY() + getOffset()[1]);
 		colBox.setBounds((int) x, (int) y, width, height);
 		setBounds((int) x, (int) y, width, height);
 	}
@@ -107,12 +107,10 @@ public class Player extends Entity {
 		}
 	}
 
-	private WaterBolt wb;
-
 	private void shoot() {
-		if (m.clicked) {
-			new WaterBolt((int) x + 24, (int) y + 24, m.getX() + getOffset()[0], m.getY() + getOffset()[1], world);
-
+		if (m.clicked && mana > 5 && t.Ring()) {
+			new Energy((int) x + 24, (int) y + 24, m.getX() + getOffset()[0] + 8, m.getY() + getOffset()[1] +8, world);
+			mana -= 5;
 			t.reset();
 		}
 
@@ -210,6 +208,7 @@ public class Player extends Entity {
 		x = bX;
 		y = bY;
 	}
+	double x2,y2;
 
 	public void render(Graphics2D g) {
 		if (dir == 2) {
@@ -221,6 +220,8 @@ public class Player extends Entity {
 		} else if (dir == 0) {
 			g.drawImage(animDown.getCurrentImage(), (int) x, (int) y, width, height, null);
 		}
+		g.drawLine((int)x2-3, (int)y2, (int)x2+3, (int)y2);
+		g.drawLine((int)x2, (int)y2-3, (int)x2, (int)y2+3);
 	}
 
 	public void renderAfter(Graphics2D g) {

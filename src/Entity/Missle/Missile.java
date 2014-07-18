@@ -7,25 +7,25 @@ import java.util.ArrayList;
 import Entity.Particle.Particle;
 import Main.Game;
 
-public class Missle extends Rectangle {
+public class Missile extends Rectangle {
 	private static final long serialVersionUID = 1L;
 
 	protected double xVel, yVel;
 	protected int xTarget, yTarget;
 	public ArrayList<Particle> particles = new ArrayList<>();
 
-	public Missle(int x, int y, int width, int height, int targetX, int targetY) {
+	public Missile(int x, int y, int width, int height, int targetX, int targetY) {
 		super(x, y, width, height);
 		setBounds(x, y, width, height);
-		Game.missles.add(this);
+		Game.missiles.add(this);
 	}
 
-	public Missle(int x, int y, int width, int height, double velX, double velY) {
+	public Missile(int x, int y, int width, int height, double velX, double velY) {
 		super(x, y, width, height);
 		setBounds(x, y, width, height);
 		xVel = velX;
 		yVel = velY;
-		Game.missles.add(this);
+		Game.missiles.add(this);
 	}
 
 	public void tick() {

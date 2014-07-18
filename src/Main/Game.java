@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import Control.Camera;
 import Control.Controler;
 import Entity.*;
-import Entity.Missle.Missle;
+import Entity.Missle.Missile;
 import Entity.Particle.Particle;
 import World.World;
 
@@ -16,7 +16,7 @@ public class Game extends Menu {
 	public static int animSpeed = 250;
 	public Camera c;
 
-	public static ArrayList<Missle> missles = new ArrayList<>();
+	public static ArrayList<Missile> missiles = new ArrayList<>();
 	public static ArrayList<Particle> particles = new ArrayList<>();
 
 	private World w;
@@ -35,8 +35,8 @@ public class Game extends Menu {
 		w.tick();
 		c.tick(p);
 		p.tick();
-		for(int i = 0; i< missles.size();i++){
-			missles.get(i).tick();
+		for(int i = 0; i< missiles.size();i++){
+			missiles.get(i).tick();
 		}
 		for(int i = 0; i< particles.size();i++){
 			particles.get(i).tick();
@@ -47,8 +47,8 @@ public class Game extends Menu {
 		g.translate(c.getXOffset(), c.getYOffset());
 		w.render(g);
 		p.render(g);
-		for(int i = 0; i< missles.size();i++){
-			missles.get(i).render(g);
+		for(int i = 0; i< missiles.size();i++){
+			missiles.get(i).render(g);
 		}
 		for(int i = 0; i< particles.size();i++){
 			particles.get(i).render(g);

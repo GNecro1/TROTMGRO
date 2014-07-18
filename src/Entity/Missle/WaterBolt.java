@@ -9,7 +9,7 @@ import Entity.Particle.WaterBoltParticle;
 import Main.Game;
 import World.World;
 
-public class WaterBolt extends Missle {
+public class WaterBolt extends Missile {
 	private static final long serialVersionUID = 1L;
 
 	private Timer t;
@@ -44,7 +44,7 @@ public class WaterBolt extends Missle {
 		colors[5] = new Color(0x26CBE0);
 
 		for (int i = 0; i < 80; i++) {
-			//new WaterBoltParticle(x, y, this, r.nextInt(360), r.nextInt(20), colors, r);
+			new WaterBoltParticle(x, y, this, r.nextInt(360), r.nextInt(20), colors, r);
 		}
 	}
 
@@ -70,9 +70,9 @@ public class WaterBolt extends Missle {
 
 	private void destroy() {
 		for (int i = 0; i < 80; i++) {
-			//new WaterBoltParticle(x, y, this, colors, r);
+			new WaterBoltParticle(x, y, this, colors, r);
 		}
-		Game.missles.remove(this);
+		Game.missiles.remove(this);
 	}
 
 	public void rendering(Graphics2D g) {
