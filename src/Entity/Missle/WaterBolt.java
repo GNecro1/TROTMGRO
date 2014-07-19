@@ -58,12 +58,13 @@ public class WaterBolt extends Missile {
 			setBounds((int) x, (int) y, width, height);
 		}
 		
-		for (int i = 0; i < w.tiles.length; i++) {
-			for (int j = 0; j < w.tiles[0].length; j++) {
-				if (this.intersects(w.tiles[i][j]) && w.tiles[i][j].solid) {
-					destroy();
-				}
-			}
+		int tileX = (int) Math.floor((x + width / 2) / Tile.TILE_SIZE);
+		int tileY = (int) Math.floor((y + height / 2) / Tile.TILE_SIZE);
+		
+		if (tileX >= 0 && tileX < w.tiles.length && tileY >= 0 && tileY < w.tiles[0].length) {
+			if (this.intersects(w.tiles[tileX][tileY]) && w.tiles[tileX][tileY].solid) {
+				destroy();
+			}			
 		}
 		// TODO : Collision with entityes
 	}
