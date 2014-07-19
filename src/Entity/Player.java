@@ -11,6 +11,7 @@ import Control.Controler;
 import Control.Mouse;
 import Control.Timer;
 import Entity.Missle.Energy;
+import Entity.Missle.WaterBolt;
 import Graphics.Animation;
 import Graphics.RL;
 import Main.Game;
@@ -33,9 +34,11 @@ public class Player extends Entity {
 	private int bX, bY;
 	private Timer t = new Timer(3);
 	private Timer MRT = new Timer(0.5);
+	private Game game;
 
-	public Player(int x, int y, World w) {
+	public Player(int x, int y, World w,Game g) {
 		super(x, y, 48, 48);
+		game =g;
 		t.start();
 		bX = x;
 		bY = y;
@@ -108,9 +111,9 @@ public class Player extends Entity {
 	}
 
 	private void shoot() {
-		if (m.clicked && mana > 5 && t.Ring()) {
-			new Energy((int) x + 24, (int) y + 24, m.getX() + getOffset()[0] + 8, m.getY() + getOffset()[1] +8, world);
-			mana -= 5;
+		if (m.clicked ) {
+			new Energy((int) x + 24, (int) y + 24, m.getX() + getOffset()[0] - 8, m.getY()+ getOffset()[1] -8, world,game);
+			
 			t.reset();
 		}
 

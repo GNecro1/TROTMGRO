@@ -1,7 +1,6 @@
 package Control;
 
 import Entity.Player;
-import Main.Game;
 
 public class Camera {
 

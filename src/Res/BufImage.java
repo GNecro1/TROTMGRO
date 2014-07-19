@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 public class BufImage {
 
-	public static BufferedImage grabImage(String path, int x, int y, int width, int height) {
+	/*public static BufferedImage grabImage(String path, int x, int y, int width, int height) {
 		BufferedImage tile = null;
 		BufferedImage bildTileset = null;
 		try {
@@ -21,9 +21,9 @@ public class BufImage {
 		}
 		tile = bildTileset.getSubimage(x * width, y * height, width, height);
 		return tile;
-	}
+	}*/
 	
-	/*public static BufferedImage grabImage(String path, int x, int y, int width, int height) {
+	public static BufferedImage grabImage(String path, int x, int y, int width, int height) {
 		BufferedImage tile = null;
 		BufferedImage bildTileset = null;
 		try {
@@ -34,7 +34,7 @@ public class BufImage {
 		}
 		tile = bildTileset.getSubimage(x * width, y * height, width, height);
 		return tile;
-	}*/
+	}
 
 	public static BufferedImage rotateMyImage(BufferedImage img, double angle) {
 		int w = img.getWidth();

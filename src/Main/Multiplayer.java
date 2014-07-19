@@ -25,7 +25,7 @@ public class Multiplayer extends Menu {
 	public void init() {
 		client = new ClientHolder(this);
 		c = new CameraOnline(this);
-		p = new Player(Main.width / 2 - 32, Main.height / 2 - 32,null);
+		//p = new Player(Main.width / 2 - 32, Main.height / 2 - 32,null);
 		Thread c = new Thread(client);
 		c.start();
 	}

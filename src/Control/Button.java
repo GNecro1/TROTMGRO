@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import Graphics.RL;
 import Main.Main;
 
 public class Button extends Rectangle {

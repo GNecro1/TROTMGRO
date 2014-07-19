@@ -6,7 +6,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import Main.Game;
 import Main.Main;
 
 public class Controler implements KeyListener, MouseListener, MouseMotionListener {

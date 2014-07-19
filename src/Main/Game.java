@@ -16,7 +16,7 @@ public class Game extends Menu {
 	public static int animSpeed = 250;
 	public Camera c;
 
-	public static ArrayList<Missile> missiles = new ArrayList<>();
+	public ArrayList<Missile> missiles = new ArrayList<>();
 	public static ArrayList<Particle> particles = new ArrayList<>();
 
 	private World w;
@@ -27,7 +27,7 @@ public class Game extends Menu {
 		super(main, con);
 		c = new Camera();
 		w = new World(c);
-		p = new Player(2000, 2200, w);
+		p = new Player(0, 0, w,this);
 		p.setMouse(con.mouse);
 	}
 

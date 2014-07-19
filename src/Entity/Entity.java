@@ -6,8 +6,6 @@ import java.awt.Rectangle;
 public class Entity extends Rectangle {
 
 	public double x, y;
-	public double drawX;
-	public double drawY;
 	public int width, height;
 
 	public Entity(int x, int y, int width, int height) {
