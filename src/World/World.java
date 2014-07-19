@@ -24,16 +24,25 @@ public class World {
 	}
 
 	public void gen() {
-		for (int i = 0; i < tiles.length; i++) {
-			for (int j = 0; j < tiles[0].length; j++) {
-				if (r.nextInt(10) > 1) {
-					tiles[i][j] = new Grass(i * 64, j * 64);
+	public void gen() {
+		for (int i = 0; i < this.worldSize; i++) {
+			for (int j = 0; j < this.worldSize; j++) {				
+				// Generate bounding frame
+				if (i == 0 || i == this.worldSize - 1) {
+					tiles[i][j] = new Stone(i * Tile.TILE_SIZE, j * Tile.TILE_SIZE);
+				} else if (j == 0 || j == this.worldSize - 1) {
+					tiles[i][j] = new Stone(i * Tile.TILE_SIZE, j * Tile.TILE_SIZE);
 				} else {
-					tiles[i][j] = new Stone(i * 64, j * 64);
+					if (r.nextInt(10) > 1) {
+						tiles[i][j] = new Grass(i * Tile.TILE_SIZE, j * Tile.TILE_SIZE);
+					} else {
+						tiles[i][j] = new Stone(i * Tile.TILE_SIZE, j * Tile.TILE_SIZE);
+					}
 				}
 			}
 		}
-
+		
+	}
 	}
 
 	public void tick() {
