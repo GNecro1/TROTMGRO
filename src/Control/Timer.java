@@ -7,7 +7,7 @@ public class Timer {
 	public long miliSeconds, targetTime;
 	public long now;
 
-	private boolean done = false;
+	public boolean done = false;
 	private boolean start = false;
 
 	public Timer(double sec) {

@@ -1,54 +1,40 @@
 package Main;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.TextField;
 import java.util.ArrayList;
 
-import Control.Camera;
-import Control.CameraOnline;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import Control.Button;
 import Control.Controler;
-import Entity.Player;
-import Entity.PlayerOnline;
-import Graphics.RL;
-import Multiplayer.ClientHolder;
 
-public class Multiplayer extends Menu {
-
-	private ClientHolder client;
-	private CameraOnline c;
-	public Player p;
-	public ArrayList<PlayerOnline> po = new ArrayList<>();
-
+public class Multiplayer extends Game {
+	
+	public ArrayList<Button> buttons = new ArrayList<>();
+	
 	public Multiplayer(Main main, Controler control) {
 		super(main, control);
+		Button host = new Button(150, 150, 128, 48, "Host");
+		host.setMouseListener(controler);
+		host.setChangeState(2);
+		host.setOffSets(35, 5);
+		host.setFont(new Font("Courier", 1, 24));
+		buttons.add(host);
 	}
-
-	public void init() {
-		client = new ClientHolder(this);
-		c = new CameraOnline(this);
-		//p = new Player(Main.width / 2 - 32, Main.height / 2 - 32,null);
-		Thread c = new Thread(client);
-		c.start();
-	}
-
+	
 	public void tick() {
-		p.tick();
-		c.tick();
+		for (int i = 0; i < buttons.size(); i++) {
+			buttons.get(i).tick();
+		}
 	}
-
+	
 	public void render(Graphics2D g) {
-		g.translate(c.getXOffset(), c.getYOffset());
-		for (int i = 0; i < 64; i++) {
-			for (int j = 0; j < 64; j++) {
-				g.drawImage(RL.grass, i * 64, j * 64, 64, 64, null);
-			}
+		for (int i = 0; i < buttons.size(); i++) {
+			buttons.get(i).render(g);
 		}
-		for (PlayerOnline pon : po) {
-			pon.render(g);
-		}
-		p.render(g);
 	}
-
-	public Player getPlayer() {
-		return p;
-	}
+	
 }

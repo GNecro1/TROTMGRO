@@ -12,6 +12,7 @@ public class Controler implements KeyListener, MouseListener, MouseMotionListene
 
 	public Main main;
 	public static boolean up = false, down = false, left = false, right = false, space = false;
+	public static boolean m = false;
 	public Mouse mouse;
 
 	public Controler(Main main) {
@@ -92,6 +93,9 @@ public class Controler implements KeyListener, MouseListener, MouseMotionListene
 		if (key == KeyEvent.VK_SPACE) {
 			space = true;
 		}
+		if (key == KeyEvent.VK_M) {
+			m = true;
+		}
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -110,6 +114,9 @@ public class Controler implements KeyListener, MouseListener, MouseMotionListene
 		}
 		if (key == KeyEvent.VK_SPACE) {
 			space = false;
+		}
+		if (key == KeyEvent.VK_M) {
+			m = false;
 		}
 	}
 

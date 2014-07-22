@@ -27,7 +27,7 @@ public class Game extends Menu {
 		super(main, con);
 		c = new Camera();
 		w = new World(c);
-		p = new Player(0, 0, w,this);
+		p = new Player(640, 1280, w,this);
 		p.setMouse(con.mouse);
 	}
 

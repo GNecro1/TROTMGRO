@@ -45,4 +45,7 @@ public class RL {
 
 	public static BufferedImage grass = BufImage.grabImage("img/tiles.png", 0, 0, 32, 32);
 	public static BufferedImage stone = BufImage.grabImage("img/tiles.png", 1, 0, 32, 32);
+	public static BufferedImage stoneHC = BufImage.grabImage("img/HCR.png", 0, 0, 32, 32);
+	public static BufferedImage stoneVC = BufImage.grabImage("img/VCR.png", 0, 0, 32, 32);
+	public static BufferedImage map1_0 = BufImage.grabImage("map/1_0.png", 0, 0, 128, 128);
 }

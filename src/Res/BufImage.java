@@ -10,18 +10,27 @@ import javax.imageio.ImageIO;
 
 public class BufImage {
 
-	/*public static BufferedImage grabImage(String path, int x, int y, int width, int height) {
-		BufferedImage tile = null;
-		BufferedImage bildTileset = null;
-		try {
-			bildTileset = ImageIO.read(new File(path));
-		} catch (IOException error) {
-			System.err.println("Tileset not found");
-			error.printStackTrace();
+	
+	public static BufferedImage changeOpacitu(BufferedImage modMe, double modAmount) {
+		for (int x = 0; x < modMe.getWidth(); x++) {
+			for (int y = 0; y < modMe.getHeight(); y++) {
+				//
+				int argb = modMe.getRGB(x, y); // always returns TYPE_INT_ARGB
+				int alpha = (argb >> 24) & 0xff; // isolate alpha
+				
+				alpha *= modAmount; // similar distortion to tape saturation
+									// (has scrunching effect, eliminates
+									// clipping)
+				alpha &= 0xff; // keeps alpha in 0-255 range
+				
+				argb &= 0x00ffffff; // remove old alpha info
+				argb |= (alpha << 24); // add new alpha info
+				modMe.setRGB(x, y, argb);
+			}
 		}
-		tile = bildTileset.getSubimage(x * width, y * height, width, height);
-		return tile;
-	}*/
+		return modMe;
+	}
+	
 	
 	public static BufferedImage grabImage(String path, int x, int y, int width, int height) {
 		BufferedImage tile = null;
