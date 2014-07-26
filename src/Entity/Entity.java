@@ -7,12 +7,18 @@ public class Entity extends Rectangle {
 
 	public double x, y;
 	public int width, height;
+	public int health;
+	protected Rectangle colBox,hitBox;
 
 	public Entity(int x, int y, int width, int height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+	}
+	
+	public void doDamega(int dmg){
+		health -= dmg;
 	}
 
 	public void setX(int x) {

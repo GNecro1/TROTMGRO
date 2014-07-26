@@ -25,15 +25,14 @@ public class Player extends Entity {
 	private double xPrev, yPrev;
 	public BufferedImage[] imagUp = { RL.player2Up1, RL.player2Up2, RL.player2Up3 }, imagLeft = { RL.player2Left1, RL.player2Left2, RL.player2Left3 }, imagDown = { RL.player2Down1, RL.player2Down2, RL.player2Down3 }, imagRight = { RL.player2Right1, RL.player2Right2, RL.player2Right3 };
 	public Animation animUp, animLeft, animRight, animDown;
-	private Rectangle colBox;
 	
 	private int dir = 0;
 	private World world;
 	private Mouse m;
-	private int health = 100, mana = 100, deaths = 0;
+	private int mana = 100, deaths = 0;
 	private int bX, bY;
 	private Timer t = new Timer(1);
-	private Timer MRT = new Timer(0.5);
+	private Timer MRT = new Timer(15);
 	private Game game;
 	private BufferedImage mini;
 	
@@ -49,7 +48,8 @@ public class Player extends Entity {
 		t.done = true;
 		bX = x;
 		bY = y;
-		colBox = new Rectangle(x - 5, y - 5, 74, 74);
+		colBox = new Rectangle(x, y + 30, width, 18);
+		hitBox = this.getBounds();
 		world = w;
 		MRT.start();
 		animUp = new Animation(Game.animSpeed, imagUp);
@@ -57,6 +57,7 @@ public class Player extends Entity {
 		animLeft = new Animation(Game.animSpeed, imagLeft);
 		animRight = new Animation(Game.animSpeed, imagRight);
 		animDown.startAnimation();
+		health = 100;
 	}
 	
 	public void tick() {
@@ -72,7 +73,8 @@ public class Player extends Entity {
 		}
 		x2 = (m.getX() + getOffset()[0]);
 		y2 = (m.getY() + getOffset()[1]);
-		colBox.setBounds((int) x, (int) y, width, height);
+		colBox.setBounds((int) x, (int) y + 30, width, 18);
+		hitBox.setBounds(this.getBounds());
 		setBounds((int) x, (int) y, width, height);
 	}
 	
@@ -270,12 +272,20 @@ public class Player extends Entity {
 		if (Controler.m) {
 			g.drawImage(mini, 620, 13, null);
 			g.setColor(new Color(255, 0, 0, 125));
-			g.drawRect(620 + (int) (x / 32), 13 + (int) (y / 32), 2, 2);
+			g.fillRect(620 + (int) (x / 32), 13 + (int) (y / 32), 2, 2);
 		}
 	}
 	
 	public int getID() {
 		return ID;
+	}
+
+	public void addMana(int i) {
+		if((mana+i) < 100){
+			mana += i;
+		}else{
+			mana = 100;
+		}
 	}
 	
 }

@@ -17,6 +17,10 @@ public class Tile extends Rectangle {
 	public void tick() {
 
 	}
+	
+	public void preRender(Graphics2D g){
+		
+	}
 
 	public void render(Graphics2D g) {
 		

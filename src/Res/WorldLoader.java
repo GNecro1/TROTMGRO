@@ -5,6 +5,7 @@ import World.World;
 import World.Tile.Grass;
 import World.Tile.Stone;
 import World.Tile.Tile;
+import World.Tile.Tree;
 
 public class WorldLoader {
 	
@@ -23,7 +24,7 @@ public class WorldLoader {
 					tile[i][j] = new Grass(i * 64, j * 64);
 				}
 				else if (index[i + j * ws] == RL.map1_0.getRGB(20, 17)) {
-					tile[i][j] = new Stone(i * 64, j * 64, w);
+					tile[i][j] = new Tree(i * 64, j * 64, w);
 				}
 			}
 			System.out.println("");

@@ -1,5 +1,6 @@
 package Graphics;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import Res.BufImage;
@@ -42,10 +43,17 @@ public class RL {
 	public static BufferedImage player2Right1 = BufImage.grabImage("img/player2.png", 0, 1, 16, 18);
 	public static BufferedImage player2Right2 = BufImage.grabImage("img/player2.png", 1, 1, 16, 18);
 	public static BufferedImage player2Right3 = BufImage.grabImage("img/player2.png", 2, 1, 16, 18);
+	
+	public static BufferedImage CutyDown1 = BufImage.grabImage("img/Cuty.png", 0, 0, 24, 24);
+	public static BufferedImage CutyDown2 = BufImage.grabImage("img/Cuty.png", 1, 0, 24, 24);
+	public static BufferedImage CutyDown3 = BufImage.grabImage("img/Cuty.png", 2, 0, 24, 24);
 
 	public static BufferedImage grass = BufImage.grabImage("img/tiles.png", 0, 0, 32, 32);
 	public static BufferedImage stone = BufImage.grabImage("img/tiles.png", 1, 0, 32, 32);
+	public static BufferedImage tree = BufImage.grabImage("img/tiles.png", 2, 1, 32, 32);
 	public static BufferedImage stoneHC = BufImage.grabImage("img/HCR.png", 0, 0, 32, 32);
 	public static BufferedImage stoneVC = BufImage.grabImage("img/VCR.png", 0, 0, 32, 32);
 	public static BufferedImage map1_0 = BufImage.grabImage("map/1_0.png", 0, 0, 128, 128);
+	public static BufferedImage tree2 = BufImage.grabImage("img/tiles.png", 2, 0, 32, 32);
+	public static Image xp = BufImage.grabImage("img/ManaItem.png", 0, 0, 12, 12);
 }

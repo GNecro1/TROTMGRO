@@ -40,7 +40,20 @@ public class World {
 	public void tick() {
 		for (int i = 0; i < tiles.length; i++) {
 			for (int j = 0; j < tiles[0].length; j++) {
-				tiles[i][j].tick();
+				if (tiles[i][j].intersects(new Rectangle((int) (-c.getXOffset() - 64), (int) (-c.getYOffset() - 64), 448 * 2 + 128, 360 * 2 + 64))) {
+					
+					tiles[i][j].tick();
+				}
+			}
+		}
+	}
+	
+	public void preRender(Graphics2D g) {
+		for (int i = 0; i < tiles.length; i++) {
+			for (int j = 0; j < tiles[0].length; j++) {
+				if (tiles[i][j].intersects(new Rectangle((int) (-c.getXOffset() - 64), (int) (-c.getYOffset() - 64), 448 * 2 + 128, 360 * 2 + 64))) {
+					tiles[i][j].preRender(g);
+				}
 			}
 		}
 	}

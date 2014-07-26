@@ -70,10 +70,10 @@ public class Missile extends Rectangle {
 	}
 	
 	public void render(Graphics2D g) {
+		rendering(g);
 		for (Particle p : particles) {
 			p.render(g);
 		}
-		rendering(g);
 		
 	}
 	
