@@ -16,6 +16,8 @@ public class Missile extends Rectangle {
 	public ArrayList<Particle> particles = new ArrayList<>();
 	Game Game;
 	protected int dmg;
+
+	public boolean hit;
 	
 	public Missile(int x, int y, int width, int height, int targetX, int targetY, Game g) {
 		super(x, y, width, height);

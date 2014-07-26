@@ -28,13 +28,16 @@ public class Player extends Entity {
 	
 	private int dir = 0;
 	private World world;
-	private Mouse m;
+	public Mouse m;
 	private int mana = 100, deaths = 0;
 	private int bX, bY;
 	private Timer t = new Timer(1);
-	private Timer MRT = new Timer(15);
-	private Game game;
+	private Timer MRT = new Timer(10);
+	public Game game;
 	private BufferedImage mini;
+	double x2, y2;
+	boolean f = true;
+	private double lvl = 1, xp = 0;
 	
 	public Player(int x, int y, World w, Game g) {
 		super(x, y, 48, 48);
@@ -45,7 +48,6 @@ public class Player extends Entity {
 		mini = BufImage.changeOpacitu(mini, 125);
 		game = g;
 		t.start();
-		t.done = true;
 		bX = x;
 		bY = y;
 		colBox = new Rectangle(x, y + 30, width, 18);
@@ -60,6 +62,114 @@ public class Player extends Entity {
 		health = 100;
 	}
 	
+	public void addXP(double i) {
+		xp += i;
+		if (xp / lvl > 1) {
+			lvl++;
+			xp = 0;
+		}
+	}
+	
+	private void shoot() {
+		if (m.clicked && t.Ring() && mana > 5) {
+			new Energy((int) x + 24, (int) y + 24, m.getX() + getOffset()[0] - 8, m.getY() + getOffset()[1] - 8, world, game, lvl,true);
+			
+			mana -= 5;
+			
+			t.reset();
+		}
+		
+	}
+	
+	public void setMouse(Mouse mouse) {
+		m = mouse;
+	}
+	
+	public int[] getOffset() {
+		int[] i = new int[2];
+		
+		i[0] = (int) (x - (448 - 32));
+		i[1] = (int) (y - (360 - 32));
+		
+		return i;
+	}
+	
+	public void respawn() {
+		health = 100;
+		mana = 100;
+		deaths++;
+		x = bX;
+		y = bY;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public void addMana(int i) {
+		if ((mana + i) < 100) {
+			mana += i;
+		}
+		else {
+			mana = 100;
+		}
+	}
+	
+	public void render(Graphics2D g) {
+		g.setColor(new Color(0,0,0,125));
+		g.fillOval(colBox.x-5, colBox.y, colBox.width+5, colBox.height+5);
+		if (dir == 2) {
+			g.drawImage(animRight.getCurrentImage(), (int) x, (int) y, width, height, null);
+		}
+		else if (dir == 1) {
+			g.drawImage(animUp.getCurrentImage(), (int) x, (int) y, width, height, null);
+		}
+		else if (dir == 3) {
+			g.drawImage(animLeft.getCurrentImage(), (int) x, (int) y, width, height, null);
+		}
+		else if (dir == 0) {
+			g.drawImage(animDown.getCurrentImage(), (int) x, (int) y, width, height, null);
+		}
+		g.drawLine((int) x2 - 3, (int) y2, (int) x2 + 3, (int) y2);
+		g.drawLine((int) x2, (int) y2 - 3, (int) x2, (int) y2 + 3);
+	}
+	
+	public void renderAfter(Graphics2D g) {
+		g.setColor(Color.BLACK);
+		g.fillRect(7, 13, 156, 26);
+		g.setColor(Color.DARK_GRAY);
+		g.fill3DRect(10, 15, 150, 20, true);
+		g.setColor(new Color(255, 59, 59));
+		g.fill3DRect(10, 15, (health / 2) * 3, 20, true);
+		g.setColor(Color.white);
+		g.setFont(new Font("Courier", 1, 17));
+		g.drawString("HEALTH : " + health, 25, 29);
+		
+		g.setColor(Color.BLACK);
+		g.fillRect(167, 13, 156, 26);
+		g.setColor(Color.DARK_GRAY);
+		g.fill3DRect(170, 15, 150, 20, true);
+		g.setColor(new Color(38, 157, 255));
+		g.fill3DRect(170, 15, (mana / 2) * 3, 20, true);
+		g.setColor(Color.white);
+		g.drawString("MANA : " + mana, 185, 29);
+		
+		g.setColor(Color.black);
+		g.fillRect(7, 40, 312, 6);
+		g.setColor(Color.yellow);
+		g.fill3DRect(7 + 2, 42, (int) (xp * 310 / lvl), 2, true);
+		g.setColor(Color.BLACK);
+		g.fill3DRect(112, 48, 100, 30,true);
+		g.setColor(Color.yellow);
+		g.drawString("Level: " + (int)lvl, 115, 65);
+		
+		if (Controler.m) {
+			g.drawImage(mini, 620, 13, null);
+			g.setColor(new Color(255, 0, 0, 125));
+			g.fillRect(620 + (int) (x / 32), 13 + (int) (y / 32), 2, 2);
+		}
+	}
+	
 	public void tick() {
 		animUp.stopAnimation();
 		animDown.stopAnimation();
@@ -68,7 +178,7 @@ public class Player extends Entity {
 		shoot();
 		move();
 		if (MRT.Ring() && mana < 100) {
-			mana++;
+			mana += lvl / 2;
 			MRT.reset();
 		}
 		x2 = (m.getX() + getOffset()[0]);
@@ -119,21 +229,6 @@ public class Player extends Entity {
 		if (health < 1) {
 			respawn();
 		}
-	}
-	
-	private void shoot() {
-		if (m.clicked && t.Ring() && mana > 5) {
-			new Energy((int) x + 24, (int) y + 24, m.getX() + getOffset()[0] - 8, m.getY() + getOffset()[1] - 8, world, game);
-			
-			mana -= 5;
-			
-			t.reset();
-		}
-		
-	}
-	
-	public void setMouse(Mouse mouse) {
-		m = mouse;
 	}
 	
 	private boolean colDectUP() {
@@ -211,81 +306,4 @@ public class Player extends Entity {
 		colBox.x -= Game.pSpeed;
 		return true;
 	}
-	
-	public int[] getOffset() {
-		int[] i = new int[2];
-		
-		i[0] = (int) (x - (448 - 32));
-		i[1] = (int) (y - (360 - 32));
-		
-		return i;
-	}
-	
-	public void respawn() {
-		health = 100;
-		mana = 100;
-		deaths++;
-		x = bX;
-		y = bY;
-	}
-	
-	double x2, y2;
-	
-	public void render(Graphics2D g) {
-		if (dir == 2) {
-			g.drawImage(animRight.getCurrentImage(), (int) x, (int) y, width, height, null);
-		}
-		else if (dir == 1) {
-			g.drawImage(animUp.getCurrentImage(), (int) x, (int) y, width, height, null);
-		}
-		else if (dir == 3) {
-			g.drawImage(animLeft.getCurrentImage(), (int) x, (int) y, width, height, null);
-		}
-		else if (dir == 0) {
-			g.drawImage(animDown.getCurrentImage(), (int) x, (int) y, width, height, null);
-		}
-		g.drawLine((int) x2 - 3, (int) y2, (int) x2 + 3, (int) y2);
-		g.drawLine((int) x2, (int) y2 - 3, (int) x2, (int) y2 + 3);
-	}
-	
-	boolean f = true;
-	
-	public void renderAfter(Graphics2D g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(7, 13, 156, 26);
-		g.setColor(Color.DARK_GRAY);
-		g.fill3DRect(10, 15, 150, 20, true);
-		g.setColor(new Color(255, 59, 59));
-		g.fill3DRect(10, 15, (health / 2) * 3, 20, true);
-		g.setColor(Color.white);
-		g.setFont(new Font("Courier", 1, 17));
-		g.drawString("HEALTH : " + health, 25, 29);
-		
-		g.setColor(Color.BLACK);
-		g.fillRect(167, 13, 156, 26);
-		g.setColor(Color.DARK_GRAY);
-		g.fill3DRect(170, 15, 150, 20, true);
-		g.setColor(new Color(38, 157, 255));
-		g.fill3DRect(170, 15, (mana / 2) * 3, 20, true);
-		g.setColor(Color.white);
-		g.drawString("MANA : " + mana, 185, 29);
-		if (Controler.m) {
-			g.drawImage(mini, 620, 13, null);
-			g.setColor(new Color(255, 0, 0, 125));
-			g.fillRect(620 + (int) (x / 32), 13 + (int) (y / 32), 2, 2);
-		}
-	}
-	
-	public int getID() {
-		return ID;
-	}
-
-	public void addMana(int i) {
-		if((mana+i) < 100){
-			mana += i;
-		}else{
-			mana = 100;
-		}
-	}
-	
 }

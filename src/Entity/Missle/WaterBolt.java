@@ -19,7 +19,7 @@ public class WaterBolt extends Missile {
 	private int index;
 	private World w;
 	
-	public WaterBolt(int x, int y, double targetX, double targetY, World world, Game g) {
+	public WaterBolt(int x, int y, double targetX, double targetY, World world, Game g, int str) {
 		super(x, y, 16, 16, (int) targetX, (int) targetY, g);
 		w = world;
 		dmg = 30;
@@ -47,7 +47,7 @@ public class WaterBolt extends Missile {
 		colors[4] = new Color(0x0055B0);
 		colors[5] = new Color(0x26CBE0);
 		
-		for (int i = 0; i < 80; i++) {
+		for (int i = 0; i < 10*str; i++) {
 			new WaterBoltParticle(x, y, this, r.nextInt(360), r.nextInt(20), colors, r);
 		}
 	}

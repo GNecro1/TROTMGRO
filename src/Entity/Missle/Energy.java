@@ -16,10 +16,11 @@ public class Energy extends Missile {
 	private Random r;
 	private World w;
 	
-	public Energy(int x, int y, double targetX, double targetY, World world, Game g) {
+	public Energy(int x, int y, double targetX, double targetY, World world, Game g,double lvl, boolean b) {
 		super(x, y, 8, 8, (int) targetX, (int) targetY, g);
 		w = world;
-		dmg = 4;
+		hit = b;
+		dmg = (int) (1*lvl);
 		/** float pathX = (float) (targetX - x); float pathY = (float) (targetY -
 		 * y); float distance = (float) Math.atan2(Math.sqrt(pathX * pathX +
 		 * pathY * pathY),Math.sqrt(pathX * pathX + pathY * pathY)); float

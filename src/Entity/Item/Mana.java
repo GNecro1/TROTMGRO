@@ -2,16 +2,18 @@ package Entity.Item;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import Control.Timer;
 import Graphics.RL;
 import Main.Game;
 import Res.BufImage;
 
-public class Mana extends Item {
+public class Mana extends WorldItem {
 	double degree = 0;
 	int manaReg;
 	private Timer t;
+	
 	public Mana(int x, int y, int mana) {
 		super(x, y, 24, 24);
 		manaReg = mana;
@@ -21,7 +23,7 @@ public class Mana extends Item {
 	
 	public void tick() {
 		if (this.intersects(Game.p)) {
-			Game.p.addMana(manaReg);
+			Game.p.addMana(manaReg+new Random().nextInt(3));
 			Game.ent.remove(this);
 		}
 		if(t.Ring()){

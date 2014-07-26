@@ -17,7 +17,7 @@ public class World {
 	int worldSize = 128;
 	public Tile[][] tiles = new Tile[worldSize][worldSize];
 	
-	private Random r = new Random(10);
+	private Random r = new Random();
 	private Camera c;
 	private Timer t = new Timer(10);
 	
@@ -55,8 +55,9 @@ public class World {
 			t.reset();
 		}
 	}
+	
 	private void spawnCuty() {
-		int spawnRate = 20;
+		int spawnRate = 14;
 		int chance = r.nextInt(100);
 		if (chance > spawnRate) {
 			for (int i = 0; i < chance / spawnRate; i++) {
@@ -65,13 +66,13 @@ public class World {
 		}
 	}
 	
-	private void spawnCutyRe(){
+	private void spawnCutyRe() {
 		int x = r.nextInt(worldSize);
 		int y = r.nextInt(worldSize);
-		if(!tiles[x][y].solid){
+		if (!tiles[x][y].solid) {
 			new Cuty(x * 64, y * 64, this);
-			System.out.println("Spawned!");
-		}else{
+		}
+		else {
 			spawnCutyRe();
 		}
 	}

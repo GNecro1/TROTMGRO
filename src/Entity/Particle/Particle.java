@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 
 public class Particle {
 
-	protected int x,y;
+	public int x,y;
 	
 	public Particle(int xPos, int yPos) {
 		x = xPos;
