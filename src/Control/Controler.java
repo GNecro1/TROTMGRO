@@ -94,7 +94,11 @@ public class Controler implements KeyListener, MouseListener, MouseMotionListene
 			space = true;
 		}
 		if (key == KeyEvent.VK_M) {
-			m = true;
+			if(m){
+				m=false;
+			}else{
+				m=true;
+			}
 		}
 	}
 
@@ -114,9 +118,6 @@ public class Controler implements KeyListener, MouseListener, MouseMotionListene
 		}
 		if (key == KeyEvent.VK_SPACE) {
 			space = false;
-		}
-		if (key == KeyEvent.VK_M) {
-			m = false;
 		}
 	}
 

@@ -5,6 +5,8 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import Control.Camera;
+import Control.Timer;
+import Entity.Cuty;
 import Res.WorldLoader;
 import World.Tile.Grass;
 import World.Tile.Stone;
@@ -17,9 +19,11 @@ public class World {
 	
 	private Random r = new Random(10);
 	private Camera c;
+	private Timer t = new Timer(10);
 	
 	public World(Camera camera) {
 		c = camera;
+		t.start();
 		tiles = WorldLoader.getWorld(this, worldSize);
 	}
 	
@@ -45,6 +49,30 @@ public class World {
 					tiles[i][j].tick();
 				}
 			}
+		}
+		if (t.Ring()) {
+			spawnCuty();
+			t.reset();
+		}
+	}
+	private void spawnCuty() {
+		int spawnRate = 20;
+		int chance = r.nextInt(100);
+		if (chance > spawnRate) {
+			for (int i = 0; i < chance / spawnRate; i++) {
+				spawnCutyRe();
+			}
+		}
+	}
+	
+	private void spawnCutyRe(){
+		int x = r.nextInt(worldSize);
+		int y = r.nextInt(worldSize);
+		if(!tiles[x][y].solid){
+			new Cuty(x * 64, y * 64, this);
+			System.out.println("Spawned!");
+		}else{
+			spawnCutyRe();
 		}
 	}
 	

@@ -22,7 +22,7 @@ public class WaterBolt extends Missile {
 	public WaterBolt(int x, int y, double targetX, double targetY, World world, Game g) {
 		super(x, y, 16, 16, (int) targetX, (int) targetY, g);
 		w = world;
-		
+		dmg = 30;
 		this.x = x;
 		this.y = y;
 		

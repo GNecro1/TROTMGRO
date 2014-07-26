@@ -19,6 +19,7 @@ public class Energy extends Missile {
 	public Energy(int x, int y, double targetX, double targetY, World world, Game g) {
 		super(x, y, 8, 8, (int) targetX, (int) targetY, g);
 		w = world;
+		dmg = 4;
 		/** float pathX = (float) (targetX - x); float pathY = (float) (targetY -
 		 * y); float distance = (float) Math.atan2(Math.sqrt(pathX * pathX +
 		 * pathY * pathY),Math.sqrt(pathX * pathX + pathY * pathY)); float

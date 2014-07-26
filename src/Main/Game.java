@@ -32,8 +32,8 @@ public class Game extends Menu {
 		w = new World(c);
 		p = new Player(640, 1280, w, this);
 		p.setMouse(con.mouse);
-		new Cuty(640, 1280, 48, 48, w);
-		new Cuty(640, 1280, 48, 48, w);
+		new Cuty(640, 1280, w);
+		new Cuty(640, 1280, w);
 	}
 	
 	public void tick() {

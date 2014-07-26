@@ -23,9 +23,10 @@ public class Cuty extends Entity {
 	private Vec2 vec = new Vec2(0, 0);
 	private World world;
 	private float x, y;
+	private Timer lifeTime;
 	
-	public Cuty(int x, int y, int width, int height, World w) {
-		super(x, y, width, height);
+	public Cuty(int x, int y, World w) {
+		super(x, y, 48, 48);
 		this.x = x;
 		this.y = y;
 		Game.ent.add(this);
@@ -38,6 +39,8 @@ public class Cuty extends Entity {
 		down.startAnimation();
 		hitBox = new Rectangle(0, 0, width, height);
 		colBox = new Rectangle(0, 0, width, height);
+		lifeTime = new Timer(120);
+		lifeTime.start();
 	}
 	
 	public void tick() {
@@ -57,11 +60,13 @@ public class Cuty extends Entity {
 		setBounds((int) x, (int) y, width, height);
 		hitBox.setBounds((int) x, (int) y, width, height);
 		colBox.setBounds((int) x, (int) y, colBox.width, colBox.height);
-		
+		if(lifeTime.Ring()){
+			death();
+		}
 	}
 	
-	public void dropMana(){
-		new Mana((int)x+12,(int)y+12);
+	public void dropMana(double i){
+		new Mana((int)x+12,(int)y+12,(int)i);
 	}
 	
 	public void death(){
@@ -70,7 +75,7 @@ public class Cuty extends Entity {
 	public void hit(){
 		for(int i = 0;i<Game.missiles.size(); i++){
 			if(hitBox.intersects(Game.missiles.get(i))){
-				dropMana();
+				dropMana(Game.missiles.get(i).getDamage()/2);
 				death();
 				Game.missiles.remove(Game.missiles.get(i));
 			}

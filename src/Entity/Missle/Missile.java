@@ -15,6 +15,7 @@ public class Missile extends Rectangle {
 	protected int xTarget, yTarget;
 	public ArrayList<Particle> particles = new ArrayList<>();
 	Game Game;
+	protected int dmg;
 	
 	public Missile(int x, int y, int width, int height, int targetX, int targetY, Game g) {
 		super(x, y, width, height);
@@ -30,6 +31,10 @@ public class Missile extends Rectangle {
 		yVel = velY;
 		setGame(g);
 		Game.missiles.add(this);
+	}
+	
+	public int getDamage(){
+		return dmg;
 	}
 	
 	public static Vec2 point(Vec2 pivot, Vec2 point, float rotation) {
