@@ -6,12 +6,12 @@ import java.awt.Rectangle;
 public class Tile extends Rectangle {
 	private static final long serialVersionUID = 1L;
 
-	protected final int width = 64;
+	public static final int TILE_SIZE = 64;
 	
 	public boolean solid = false;
 	
 	public Tile(int x, int y) {
-		setBounds(x, y, width, width);
+		setBounds(x, y, TILE_SIZE, TILE_SIZE);
 	}
 
 	public void tick() {
